@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: -10}
+  m_LocalPosition: {x: 0, y: -8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 729459740}
@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c84e64e21fb304a8c3617a5eea0286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraScript: {fileID: 519420030}
   platformPrefabs: {fileID: 778941844105844243, guid: a5b9c2ac875f3a146aedbaf8004d7d56,
     type: 3}
   playerPrefabs: {fileID: 3796417875018058385, guid: c5195ee7be57ef748b06f9770421ee79,

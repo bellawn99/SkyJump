@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField]
-    Transform player;
+    public Transform player;
 
     Vector3 followPos;
     float yPos;
