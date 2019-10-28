@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 778941844105844247}
   m_Layer: 0
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Jumpable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBoxCollider2d: {fileID: 3796417875018058384, guid: c5195ee7be57ef748b06f9770421ee79,
     type: 3}
+  platformSpawnerScript: {fileID: 0}
+  cameraTrans: {fileID: 0}

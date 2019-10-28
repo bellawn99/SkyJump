@@ -13,6 +13,8 @@ public class PlatformSpawner : MonoBehaviour
     [SerializeField]
     GameObject playerPrefabs;
 
+    BoxCollider2D playerBoxCol2d;
+
     public float topPlatformYPos = 0;
 
     void Start()
@@ -27,6 +29,10 @@ public class PlatformSpawner : MonoBehaviour
         float xPos = 0f;
 
         GameObject playerGO = Instantiate(playerPrefabs, Vector3.zero, Quaternion.identity) as GameObject;
+
+        playerBoxCol2d = playerGO.GetComponent<BoxCollider2D>();
+
+        GetComponentForPlayerScript(playerGO.GetComponent<PlayerController>());
 
         cameraScript.player = playerGO.transform;
 
@@ -43,12 +49,25 @@ public class PlatformSpawner : MonoBehaviour
 
             Platform platformScript = platformGO.GetComponent<Platform>();
 
-            platformScript.playerBoxCollider2d = playerGO.GetComponent<BoxCollider2D>();
-            platformScript.platformSpawnerScript = this;
-            platformScript.cameraTrans = cameraScript.gameObject.transform;
+            GetComponentForPlatformScript(platformScript);
+
             topPlatformYPos = yPos;
             yPos += 2f;
         }
 
+    }
+
+    void GetComponentForPlatformScript(Platform _platformScript)
+    {
+        //Mengambil semua komponen yang dibutuhkan oleh PlatformScript
+        _platformScript.playerBoxCollider2d = playerBoxCol2d;
+        _platformScript.platformSpawnerScript = this;
+        _platformScript.cameraTrans = cameraScript.gameObject.transform;
+    }
+
+    void GetComponentForPlayerScript(PlayerController _playerScript)
+    {
+        //Mengambil semua komponen yang dibutuhkan oleh PlayermScript
+        _playerScript.cameraTrans = cameraScript.gameObject.transform;
     }
 }
