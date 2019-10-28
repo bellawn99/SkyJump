@@ -45,7 +45,7 @@ public class PlatformSpawner : MonoBehaviour
 
             platformScript.playerBoxCollider2d = playerGO.GetComponent<BoxCollider2D>();
             platformScript.platformSpawnerScript = this;
-            platformScript.cameratrans = cameraScript.gameObject.transform;
+            platformScript.cameraTrans = cameraScript.gameObject.transform;
             topPlatformYPos = yPos;
             yPos += 2f;
         }
