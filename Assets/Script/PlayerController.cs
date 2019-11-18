@@ -6,6 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public Transform cameraTrans;
 
+    public GameManagers gameManagerScript;
+
+    public int score = 0;
+
+    float playerFirstYPos;
+
     [SerializeField]
     float moveSpd;
 
@@ -15,7 +21,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D myRigidbody2d;
     SpriteRenderer mySpriteRenderer;
 
-    bool isDead = false;
+    public bool isDead = false;
+
 
     void Awake()
     {
@@ -23,10 +30,15 @@ public class PlayerController : MonoBehaviour
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    void Start()
+    {
+        playerFirstYPos = transform.position.y;
+    }
     void Update()
     {
         FlipCharacter();
         CheckIfDead();
+        SetScore();
     }
 
     // Update is called once per frame
@@ -46,27 +58,40 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        Vector3 pos = myRigidbody2d.position;
-        myRigidbody2d.AddForce(Vector2.right * Input.GetAxis("Horizontal") * moveSpd);
-        pos.x = Mathf.Clamp(pos.x, -1.7f, 1.7f);
-        myRigidbody2d.position = pos;
+        myRigidbody2d.AddForce(Vector2.right * TouchInput() * moveSpd);     
+        float maxXVel = Mathf.Clamp(myRigidbody2d.velocity.x, -5f, 5f);
+        myRigidbody2d.velocity= new Vector2(maxXVel, myRigidbody2d.velocity.y);
     }
 
     void FlipCharacter()
     {
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        if (TouchInput() < 0 && !mySpriteRenderer.flipX)
             mySpriteRenderer.flipX = true;
-        else if (Input.GetAxisRaw("Horizontal") > 0)
+        else if (TouchInput() > 0 && mySpriteRenderer.flipX)
             mySpriteRenderer.flipX = false;
-    }
 
+    }
     void CheckIfDead()
     {
         if (transform.position.y <= cameraTrans.position.y - 6f && !isDead)
         {
+            //player mati
             isDead = true;
-            print("Game Over");
+            gameManagerScript.GameOver();
         }
     }
 
+    void SetScore(){
+        score = Mathf.Max(score,Mathf.FloorToInt(transform.position.y - playerFirstYPos) * 10);
+    }
+    
+    int TouchInput(){
+        if(Input.touchCount > 0){
+            if(Input.GetTouch(0).position.x < Screen.width/2f)
+                return -1;
+            else if(Input.GetTouch(0).position.x >= Screen.width/2f)
+                return 1;
+          }      
+        return 0;
+    }
 }

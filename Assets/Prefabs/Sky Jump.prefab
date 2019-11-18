@@ -115,8 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc02fe2a75b6cd14f89afd03fada7729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpd: 10
-  jumpPower: 350
+  cameraTrans: {fileID: 0}
+  gameManagerScript: {fileID: 0}
+  score: 0
+  moveSpd: 5
+  jumpPower: 400
+  isDead: 0
 --- !u!61 &3796417875018058384
 BoxCollider2D:
   m_ObjectHideFlags: 0

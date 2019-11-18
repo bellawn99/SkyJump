@@ -11,7 +11,10 @@ public class Platform : MonoBehaviour
 
     public Transform cameraTrans;
 
+    public GameManagers gameManagerScript;
+
     BoxCollider2D myBoxCollider2d;
+
 
     //use this for initialization
     void Start()
@@ -22,6 +25,8 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
+      if(gameManagerScript.gameRunning){
         if (playerBoxCollider2d.bounds.min.y < myBoxCollider2d.bounds.max.y && myBoxCollider2d.isTrigger == false)
             myBoxCollider2d.isTrigger = true; //player berada dibawah platform
         else if (playerBoxCollider2d.bounds.min.y > myBoxCollider2d.bounds.max.y && myBoxCollider2d.isTrigger == true)
@@ -29,6 +34,7 @@ public class Platform : MonoBehaviour
 
         if (transform.position.y <= cameraTrans.position.y - 6f)
             SpawnANewPosition();
+        }
     }
     void SpawnANewPosition()
     {
