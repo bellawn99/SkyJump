@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     float playerFirstYPos;
 
     [SerializeField]
+    AudioSource myAudioSource;
+
+    [SerializeField]
+    AudioClip jumpSound;
+
+    [SerializeField]
     float moveSpd;
 
     [SerializeField]
@@ -53,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             myRigidbody2d.velocity = new Vector2(myRigidbody2d.velocity.x, 0f);
             myRigidbody2d.AddForce(Vector2.up * jumpPower);
+            PlaySound(jumpSound);
         }
     }
 
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour
         {
             //player mati
             isDead = true;
-            gameManagerScript.GameOver();
+            gameManagerScript.GameOver(score);
         }
     }
 
@@ -93,5 +100,11 @@ public class PlayerController : MonoBehaviour
                 return 1;
           }      
         return 0;
+    }
+
+    void PlaySound(AudioClip clipToPlay){
+    	myAudioSource.clip = clipToPlay;
+
+    	myAudioSource.Play ();
     }
 }

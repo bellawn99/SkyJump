@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameManagers : MonoBehaviour{
 
-  
-
     [SerializeField]
     UIManager uiManagerScript;
 
@@ -14,6 +12,9 @@ public class GameManagers : MonoBehaviour{
 
     [SerializeField]
     PlatformSpawner platformSpawnerScript;
+
+    [SerializeField]
+    ScoreManager scoreManagerScript;
 
     [HideInInspector]
     public PlayerController playerScript;
@@ -27,8 +28,9 @@ public class GameManagers : MonoBehaviour{
         uiManagerScript.ShowScoreText(playerScript.score);
     }
 
-    public void GameOver()
+    public void GameOver(int score)
     {
+        scoreManagerScript.AddScore(score);
         gameRunning = false;
         playerScript.gameObject.SetActive(false);
         uiManagerScript.GameEnd();
@@ -44,5 +46,9 @@ public class GameManagers : MonoBehaviour{
         playerScript.score=0;
         playerScript.isDead= false;
         gameRunning = true;
+    }
+
+    public void QuitGame(){
+        Application.Quit();
     }
 }
