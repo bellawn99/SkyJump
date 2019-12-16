@@ -14,6 +14,9 @@ public class GameManagers : MonoBehaviour{
     PlatformSpawner platformSpawnerScript;
 
     [SerializeField]
+    PatahSpawner patahSpawnerScript;
+
+    [SerializeField]
     ScoreManager scoreManagerScript;
 
     [HideInInspector]
@@ -35,12 +38,14 @@ public class GameManagers : MonoBehaviour{
         playerScript.gameObject.SetActive(false);
         uiManagerScript.GameEnd();
         platformSpawnerScript.enabled =false;
+        patahSpawnerScript.enabled =false;
     }
 
     public void StartGame()
     {
         
         platformSpawnerScript.enabled= true;
+        patahSpawnerScript.enabled =true;
         cameraScript.ResetCam();
         uiManagerScript.GameStart();
         playerScript.score=0;
