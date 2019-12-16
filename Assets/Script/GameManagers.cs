@@ -16,8 +16,14 @@ public class GameManagers : MonoBehaviour{
     [SerializeField]
     ScoreManager scoreManagerScript;
 
+    [SerializeField]
+    AudioClip gameOverSound;
+
     [HideInInspector]
     public PlayerController playerScript;
+
+    [SerializeField]
+    AudioSource myAudioSource;
 
     public bool gameRunning = false;
     // Start is called beforSe the first frame update
@@ -35,6 +41,7 @@ public class GameManagers : MonoBehaviour{
         playerScript.gameObject.SetActive(false);
         uiManagerScript.GameEnd();
         platformSpawnerScript.enabled =false;
+        PlaySound(gameOverSound);
     }
 
     public void StartGame()
@@ -50,5 +57,11 @@ public class GameManagers : MonoBehaviour{
 
     public void QuitGame(){
         Application.Quit();
+    }
+
+    void PlaySound(AudioClip clipToPlay){
+    	myAudioSource.clip = clipToPlay;
+
+    	myAudioSource.Play ();
     }
 }
